@@ -26,3 +26,4 @@ C:\Projects\Backend\UniversityManagement\obj\Debug\net8.0\refint\UniversityManag
 C:\Projects\Backend\UniversityManagement\obj\Debug\net8.0\UniversityManagement.pdb
 C:\Projects\Backend\UniversityManagement\obj\Debug\net8.0\UniversityManagement.genruntimeconfig.cache
 C:\Projects\Backend\UniversityManagement\obj\Debug\net8.0\ref\UniversityManagement.dll
+C:\Projects\Backend\UniversityManagement\obj\Debug\net8.0\UniversityManagement.sourcelink.json

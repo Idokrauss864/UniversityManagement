@@ -5,6 +5,40 @@ public class Program
     static void Main(string[] args)
     {
         University university = new University();
+
+        try
+        {
+            List<string> computerScienceCourses = new List<string> { "Programming 101", "Data Structures", "Algorithms" };
+            List<string> biologyClassCourses = new List<string> { "Cell Biology", "Genetics", "Microbiology" };
+            List<string> businessCourses = new List<string> { "Accounting", "Management", "Marketing" };
+            List<string> engineeringCourses = new List<string> { "Physics", "Calculus", "Electronics" };
+
+            Student student1 = new Student("123456789", "John Smith", 20, 3.7, computerScienceCourses);
+            Student student2 = new Student("234567890", "Emily Johnson", 19, 3.9, biologyClassCourses);
+            Student student3 = new Student("345678901", "Michael Williams", 22, 3.2, businessCourses);
+            Student student4 = new Student("456789012", "Sarah Davis", 21, 3.5, engineeringCourses);
+
+            university.AddPerson(student1);
+            university.AddPerson(student2);
+            university.AddPerson(student3);
+            university.AddPerson(student4);
+
+            List<string> computerScienceSubjects = new List<string> { "Machine Learning", "Artificial Intelligence", "Database Systems" };
+            List<string> biologySubjects = new List<string> { "Molecular Biology", "Evolutionary Biology", "Ecology" };
+
+            Professor professor1 = new Professor("567890123", "Dr. Robert Brown", 45, 95000m, computerScienceSubjects);
+            Professor professor2 = new Professor("678901234", "Dr. Jennifer Lee", 38, 85000m, biologySubjects);
+
+            university.AddPerson(professor1);
+            university.AddPerson(professor2);
+
+            Console.WriteLine("Pre-built university data loaded successfully.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error initializing university data: {ex.Message}");
+        }
+
         bool running = true;
 
         while (running)
@@ -12,7 +46,6 @@ public class Program
             DisplayMenu();
             running = HandleUserChoice(Console.ReadLine()!, university);
         }
-
     }
 
     static void DisplayMenu()
@@ -57,19 +90,19 @@ public class Program
         return true;
     }
 
-
     static void AddStudent(University university)
     {
-        try { 
-        string id = InputValidation.GetIdInput("Enter Student ID: ");
-        string name = InputValidation.GetFullName("Enter Name: ");
-        int age = InputValidation.GetIntInput("Enter Age: ");
-        double gpa = InputValidation.GetDoubleInput("Enter GPA: ");
+        try
+        {
+            string id = InputValidation.GetIdInput("Enter Student ID: ");
+            string name = InputValidation.GetFullName("Enter Name: ");
+            int age = InputValidation.GetIntInput("Enter Age: ");
+            double gpa = InputValidation.GetDoubleInput("Enter GPA: ");
 
-        List<string> courses = new List<string>();
+            List<string> courses = new List<string>();
 
-        Student student = new Student(id, name, age, gpa, courses);
-        university.AddPerson(student);
+            Student student = new Student(id, name, age, gpa, courses);
+            university.AddPerson(student);
         }
         catch (Exception ex)
         {
@@ -90,7 +123,7 @@ public class Program
             Professor professor = new Professor(id, name, age, salary, subjectsTaught);
             university.AddPerson(professor);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
@@ -142,5 +175,4 @@ public class Program
     {
         university.DisplayAllPeople();
     }
-
 }

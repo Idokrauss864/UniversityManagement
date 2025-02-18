@@ -8,19 +8,37 @@ namespace UniversityManagement;
 
 public static class InputValidation
 {
-    public static string GetIdInput(string prompt)
+    private static HashSet<string> usedIds = new HashSet<string>();
+
+    public static string GetIdInput(string prompt, bool checkUnique = true)
     {
-        Console.Write(prompt);
-        string result = Console.ReadLine()!;
-        if (result.Length != 9)
+        while (true)
         {
-            throw new ArgumentException("ID number must be 9 digits long.");
+            Console.Write(prompt);
+            string result = Console.ReadLine()!;
+
+            if (result.Length != 9)
+            {
+                throw new ArgumentException("ID number must be 9 digits long.");
+            }
+
+            if (!result.All(char.IsDigit))
+            {
+                throw new ArgumentException("ID number must contain only digits.");
+            }
+
+            if (checkUnique && usedIds.Contains(result))
+            {
+                throw new ArgumentException("This ID is already taken. Please enter a different ID.");
+            }
+
+            if (checkUnique)
+            {
+                usedIds.Add(result);
+            }
+
+            return result;
         }
-        if(!result.All(char.IsDigit))
-        {
-            throw new ArgumentException("ID number must contain only digits.");
-        }
-        return result;
     }
     public static string GetFullName(string prompt)
     {
@@ -56,7 +74,7 @@ public static class InputValidation
             }
             else
             {
-                throw new ArgumentException("Invalid input. Please enter a valid number.");
+                throw new ArgumentException("Invalid input. Please enter a valid age for the university. (16 and above)");
             }
         }
     }
@@ -80,13 +98,13 @@ public static class InputValidation
         Console.Write(prompt);
         while (true)
         {
-            if (decimal.TryParse(Console.ReadLine(), out decimal result))
+            if (decimal.TryParse(Console.ReadLine(), out decimal result) && result > 0)
             {
                 return result;
             }
             else
             {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
+                Console.WriteLine("Invalid input. Please enter a valid salary.");
             }
         }
     }

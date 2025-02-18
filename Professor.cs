@@ -23,6 +23,7 @@ public class Professor : Person
 
     public override string GetInfo()
     {
-        return $"Professor: {FullName}, ID: {Id}, Age: {Age}, Salary: {Salary}, Subjects Taught: {string.Join(", ", SubjectsTaught)}";
+        string professorInfo = base.GetInfo();
+        return $"Professor: {professorInfo},Salary: {Salary}, Subjects Taught: {string.Join(", ", SubjectsTaught)}";
     }
 }

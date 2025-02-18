@@ -7,9 +7,22 @@ public class Student : Person
     public List<string> Courses { get; } = new List<string>();
     public Student(string id, string fullName, int age, double gpa, List<string> courses) : base(id, fullName, age)
     {
+        if (gpa < 0.0 || gpa > 5.0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(gpa), "GPA must be between 0.0 and 5.0.");
+        }
+
         GPA = gpa;
+
         if (courses != null)
         {
+            foreach (string course in courses)
+            {
+                if (string.IsNullOrWhiteSpace(course))
+                {
+                    throw new ArgumentException("Course names cannot be empty or whitespace.", nameof(courses));
+                }
+            }
             Courses.AddRange(courses);
         }
     }
@@ -27,7 +40,8 @@ public class Student : Person
 
     public override string GetInfo()
     {
-        return $"Student: {FullName}, ID: {Id}, Age: {Age}, GPA: {GPA}, Courses: {string.Join(", ", Courses)}";
+        string personInfo = base.GetInfo();
+        return $"Student: {personInfo}, GPA: {GPA}, Courses: {string.Join(", ", Courses)}";
     }
 
 

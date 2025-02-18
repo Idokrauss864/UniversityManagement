@@ -13,6 +13,10 @@ public abstract class Person
         Age = age;
     }
 
-    public abstract string GetInfo();
+    public virtual string GetInfo()
+    {
+        return $"{FullName}, ID: {Id}, Age: {Age}";
+
+    }
 }
 
