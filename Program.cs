@@ -33,6 +33,11 @@ public class Program
             university.AddPerson(professor2);
 
             Console.WriteLine("Pre-built university data loaded successfully.");
+            Console.WriteLine("\nCurrent University Members:");
+            university.DisplayAllPeople();
+            Console.WriteLine("\nPress any key to continue to menu...");
+            Console.ReadKey();
+
         }
         catch (Exception ex)
         {

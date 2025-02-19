@@ -77,7 +77,7 @@ public static class InputValidation
         Console.Write(prompt);
         while (true)
         {
-            if (double.TryParse(Console.ReadLine(), out double result))
+            if (double.TryParse(Console.ReadLine(), out double result) && result > 0)
             {
                 return result;
             }

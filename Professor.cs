@@ -6,9 +6,21 @@ public class Professor : Person
     public List<string> SubjectsTaught { get; } = new List<string>();
     public Professor(string id, string fullName, int age, decimal salary, List<string> subjectsTaught) : base(id, fullName, age)
     {
+        if (salary <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(salary), "Salary must be greater than zero.");
+        }
+
         Salary = salary;
         if (subjectsTaught != null)
         {
+            foreach (string subject in subjectsTaught)
+            {
+                if (string.IsNullOrWhiteSpace(subject))
+                {
+                    throw new ArgumentException("Subject names cannot be empty or whitespace.", nameof(subjectsTaught));
+                }
+            }
             SubjectsTaught.AddRange(subjectsTaught);
         }
     }
